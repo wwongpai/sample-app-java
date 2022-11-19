@@ -1,0 +1,50 @@
+# Datadog Agent with Datadog Cluster Agent and
+# OrchestratorExplorer (Live Containers), Check Runners, and
+# External Metrics Server enabled
+
+targetSystem: "linux"
+datadog:
+  apiKeyExistingSecret:  datadog-secret
+  clusterName: warach-eks-sandbox
+  tags: []
+  orchestratorExplorer:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: true
+  apm:
+    portEnabled: true
+    socketPath: /var/run/datadog/apm.socket
+    hostSocketPath: /var/run/datadog/
+  processAgent:
+    enabled: true
+    processCollection: true
+  systemProbe:
+    enableTCPQueueLength: false
+    enableOOMKill: true
+    collectDNSStats: false
+clusterAgent:
+  replicas: 2
+  rbac:
+    create: true
+    serviceAccountName: default
+  metricsProvider:
+    enabled: true
+    createReaderRbac: true
+    useDatadogMetrics: true
+    service:
+      type: ClusterIP
+      port: 8443
+  admissionController:
+    mutateUnlabelled: false
+agents:
+  rbac:
+    create: true
+    serviceAccountName: default
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    create: true
+    serviceAccountName: default
+  replicas: 2
