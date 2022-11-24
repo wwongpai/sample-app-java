@@ -9,6 +9,8 @@ spec:
       app: mongo
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/mongo.logs: '[{"source":"mongo","service":"my_java_app"}]'
       labels:
         app: mongo
     spec:
