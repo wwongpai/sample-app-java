@@ -24,8 +24,8 @@ spec:
               name: port2
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "warach"
+              value: "exuser"
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "datadogisgood"
+              value: "passwordispass"
             - name: MONGO_INITDB_DATABASE 
               value: "ddog"
